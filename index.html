@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SumHours | Track, Add Up and Understand Your Working Hours</title>
+<meta name="description" content="SumHours helps you record, add up and review working hours with clear daily and weekly totals. Learn how it works, who it suits and how to get cleaner timesheets.">
+<meta name="keywords" content="SumHours, sum hours, add working hours, timesheet totals, hours tracker, weekly hours calculator">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#061A17">
+<meta property="og:title" content="SumHours | Every Hour Counted, Every Total Clear">
+<meta property="og:description" content="Record, add up and review working hours with clear daily and weekly totals.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "headline": "SumHours: A Clearer Way to Add Up Your Working Hours",
+      "about": "SumHours, working hours tracking and timesheet totals",
+      "inLanguage": "en"
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type": "Question", "name": "What is SumHours used for?", "acceptedAnswer": {"@type": "Answer", "text": "SumHours is used to record working hours and add them into clear daily, weekly and monthly totals that can be used for pay, invoices and planning."}},
+        {"@type": "Question", "name": "Who can use SumHours?", "acceptedAnswer": {"@type": "Answer", "text": "Freelancers, shift workers, small business owners and team managers can all use SumHours to keep accurate hour totals."}},
+        {"@type": "Question", "name": "How often should I log my hours?", "acceptedAnswer": {"@type": "Answer", "text": "Log hours at the end of every shift or work block. Daily entries are far more accurate than trying to remember a whole week."}},
+        {"@type": "Question", "name": "Does SumHours help with overtime?", "acceptedAnswer": {"@type": "Answer", "text": "Clear weekly totals make it easy to see when regular hours end and overtime begins, so nothing gets missed at pay time."}},
+        {"@type": "Question", "name": "Can I use SumHours on my phone?", "acceptedAnswer": {"@type": "Answer", "text": "The page and tool are built to work on small screens, so you can enter hours from a phone, tablet or computer."}}
+      ]
+    }
+  ]
+}
+</script>
+<style>
+:root{
+  --night:#061A17;
+  --pine:#0C2B26;
+  --moss:#14403A;
+  --champagne:#D8BC82;
+  --gold:#B98F4A;
+  --ivory:#F4EEDD;
+  --mist:#9FB3AB;
+  --ease:cubic-bezier(.2,.7,.2,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Manrope',system-ui,-apple-system,'Segoe UI',sans-serif;
+  background:var(--night);
+  color:var(--ivory);
+  line-height:1.75;
+  font-size:17px;
+  -webkit-font-smoothing:antialiased;
+}
+a{color:var(--champagne)}
+a:focus-visible,summary:focus-visible,button:focus-visible{outline:2px solid var(--champagne);outline-offset:3px}
+
+/* Top bar */
+.bar{
+  position:sticky;top:0;z-index:20;
+  display:flex;align-items:center;justify-content:space-between;gap:16px;
+  padding:14px clamp(18px,5vw,64px);
+  background:rgba(6,26,23,.88);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(216,188,130,.22);
+}
+.brand{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.7rem;font-weight:700;letter-spacing:.04em;color:var(--champagne);text-decoration:none}
+.bar nav{display:flex;gap:clamp(12px,2.4vw,30px);flex-wrap:wrap}
+.bar nav a{color:var(--ivory);text-decoration:none;font-size:.92rem;font-weight:500;opacity:.85;transition:opacity .25s,color .25s}
+.bar nav a:hover{opacity:1;color:var(--champagne)}
+
+/* Hero */
+.hero{
+  position:relative;overflow:hidden;
+  display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:clamp(24px,5vw,72px);
+  padding:clamp(48px,9vw,120px) clamp(18px,5vw,64px);
+  background:
+    radial-gradient(900px 500px at 85% 20%,rgba(216,188,130,.14),transparent 60%),
+    linear-gradient(160deg,var(--pine),var(--night) 70%);
+}
+.hero h1{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:600;
+  font-size:clamp(2.6rem,6.2vw,5rem);
+  line-height:1.06;
+  letter-spacing:.005em;
+  background:linear-gradient(100deg,var(--ivory) 20%,var(--champagne) 45%,var(--ivory) 70%);
+  background-size:220% 100%;
+  -webkit-background-clip:text;background-clip:text;
+  -webkit-text-fill-color:transparent;color:transparent;
+  animation:sheen 7s var(--ease) 1.2s infinite alternate;
+}
+.hero .lede{
+  margin-top:22px;max-width:34em;
+  font-size:1.12rem;color:var(--mist);
+}
+.hero .actions{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+.btn{
+  display:inline-block;padding:14px 30px;border-radius:2px;
+  font-weight:600;font-size:.95rem;text-decoration:none;letter-spacing:.02em;
+  transition:transform .3s var(--ease),background .3s,color .3s,box-shadow .3s;
+}
+.btn.solid{background:linear-gradient(120deg,var(--champagne),var(--gold));color:var(--night);box-shadow:0 10px 30px rgba(185,143,74,.25)}
+.btn.solid:hover{transform:translateY(-3px);box-shadow:0 16px 36px rgba(185,143,74,.38)}
+.btn.line{border:1px solid rgba(216,188,130,.6);color:var(--champagne)}
+.btn.line:hover{background:rgba(216,188,130,.1);transform:translateY(-3px)}
+.hero-art{justify-self:center;width:min(100%,460px);animation:rise 1.4s var(--ease) both}
+.hero-art svg{width:100%;height:auto;display:block;filter:drop-shadow(0 30px 60px rgba(0,0,0,.45))}
+.hand-min{transform-origin:200px 200px;animation:spin 60s linear infinite}
+.hand-hour{transform-origin:200px 200px;animation:spin 720s linear infinite}
+.hand-sec{transform-origin:200px 200px;animation:spin 12s linear infinite}
+.ring{stroke-dasharray:1100;stroke-dashoffset:1100;animation:draw 2.4s var(--ease) .3s forwards}
+.float{animation:bob 6s ease-in-out infinite}
+
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes rise{from{opacity:0;transform:translateY(28px) scale(.97)}to{opacity:1;transform:none}}
+@keyframes sheen{to{background-position:100% 0}}
+@keyframes bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+
+/* Article */
+main{padding:clamp(40px,7vw,96px) clamp(18px,5vw,64px)}
+.article{
+  max-width:820px;margin:0 auto;
+  background:linear-gradient(180deg,rgba(20,64,58,.45),rgba(12,43,38,.55));
+  border:1px solid rgba(216,188,130,.2);
+  padding:clamp(26px,5vw,64px);
+  box-shadow:0 40px 80px rgba(0,0,0,.35);
+}
+.article h2{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(2rem,4.4vw,3rem);line-height:1.15;font-weight:600;
+  color:var(--champagne);
+  padding-bottom:18px;margin-bottom:26px;
+  border-bottom:1px solid rgba(216,188,130,.35);
+}
+.article h3{
+  font-family:'Cormorant Garamond',Georgia,serif;
+  font-size:clamp(1.55rem,3vw,2.05rem);line-height:1.2;font-weight:600;
+  color:var(--ivory);margin:52px 0 16px;
+}
+.article h4{
+  font-size:1.05rem;font-weight:600;color:var(--champagne);
+  margin:26px 0 8px;letter-spacing:.01em;
+}
+.article p{margin-bottom:18px;color:#E3DDCA;max-width:68ch}
+.article a{font-weight:600;text-underline-offset:4px;text-decoration-thickness:1px;transition:color .25s}
+.article a:hover{color:var(--ivory)}
+
+figure{margin:34px 0;border:1px solid rgba(216,188,130,.25);background:var(--night);overflow:hidden}
+figure svg{display:block;width:100%;height:auto}
+figcaption{padding:12px 18px;font-size:.88rem;color:var(--mist);border-top:1px solid rgba(216,188,130,.18)}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+
+/* FAQ */
+details{border-bottom:1px solid rgba(216,188,130,.22)}
+details:first-of-type{border-top:1px solid rgba(216,188,130,.22)}
+summary{
+  cursor:pointer;list-style:none;padding:18px 36px 18px 0;position:relative;
+  font-weight:600;color:var(--ivory);
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:'+';position:absolute;right:4px;top:50%;transform:translateY(-50%);
+  font-size:1.5rem;color:var(--champagne);transition:transform .35s var(--ease);
+}
+details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details p{padding:0 0 20px;margin:0}
+
+footer{
+  text-align:center;padding:40px 18px 56px;color:var(--mist);font-size:.9rem;
+  border-top:1px solid rgba(216,188,130,.18);
+}
+footer strong{font-family:'Cormorant Garamond',Georgia,serif;font-size:1.4rem;color:var(--champagne);letter-spacing:.04em}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;text-align:left}
+  .hero-art{order:-1;width:min(78%,340px)}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  .ring{stroke-dashoffset:0}
+  .reveal{opacity:1;transform:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="bar">
+  <a class="brand" href="#top">SumHours</a>
+  <nav aria-label="Page sections">
+    <a href="#about">About</a>
+    <a href="#steps">How It Works</a>
+    <a href="#faqs">FAQs</a>
+    <a href="#conclusion">Conclusion</a>
+  </nav>
+</header>
+
+<section class="hero" id="top">
+  <div>
+    <h1>SumHours: Every Hour Counted, Every Total Clear</h1>
+    <div class="lede">A calm, accurate way to record working time and add it up into daily, weekly and monthly totals you can trust.</div>
+    <div class="actions">
+      <a class="btn solid" href="#about">Read the Guide</a>
+      <a class="btn line" href="#faqs">Common Questions</a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="false">
+    <svg viewBox="0 0 400 400" role="img" aria-label="Luxury gold clock face with moving hands representing hours being tracked and added up by SumHours">
+      <defs>
+        <radialGradient id="face" cx="50%" cy="45%" r="60%">
+          <stop offset="0" stop-color="#14403A"/>
+          <stop offset="1" stop-color="#061A17"/>
+        </radialGradient>
+        <linearGradient id="goldg" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#F0DDAE"/>
+          <stop offset="1" stop-color="#B98F4A"/>
+        </linearGradient>
+      </defs>
+      <circle cx="200" cy="200" r="186" fill="url(#face)" stroke="#D8BC82" stroke-opacity=".35" stroke-width="2"/>
+      <circle class="ring" cx="200" cy="200" r="174" fill="none" stroke="url(#goldg)" stroke-width="3" transform="rotate(-90 200 200)"/>
+      <g stroke="#D8BC82" stroke-linecap="round">
+        <line x1="200" y1="34" x2="200" y2="58" stroke-width="4"/>
+        <line x1="366" y1="200" x2="342" y2="200" stroke-width="4"/>
+        <line x1="200" y1="366" x2="200" y2="342" stroke-width="4"/>
+        <line x1="34" y1="200" x2="58" y2="200" stroke-width="4"/>
+        <g stroke-width="2" stroke-opacity=".6">
+          <line x1="283" y1="56" x2="275" y2="70"/><line x1="344" y1="117" x2="330" y2="125"/>
+          <line x1="344" y1="283" x2="330" y2="275"/><line x1="283" y1="344" x2="275" y2="330"/>
+          <line x1="117" y1="344" x2="125" y2="330"/><line x1="56" y1="283" x2="70" y2="275"/>
+          <line x1="56" y1="117" x2="70" y2="125"/><line x1="117" y1="56" x2="125" y2="70"/>
+        </g>
+      </g>
+      <text x="200" y="128" text-anchor="middle" font-family="Georgia,serif" font-size="22" letter-spacing="3" fill="#D8BC82">SUMHOURS</text>
+      <text x="200" y="292" text-anchor="middle" font-family="Georgia,serif" font-size="15" letter-spacing="2" fill="#9FB3AB">TOTAL 40 H 00 M</text>
+      <g class="hand-hour"><line x1="200" y1="200" x2="200" y2="118" stroke="#F4EEDD" stroke-width="7" stroke-linecap="round"/></g>
+      <g class="hand-min"><line x1="200" y1="200" x2="200" y2="82" stroke="#D8BC82" stroke-width="5" stroke-linecap="round"/></g>
+      <g class="hand-sec"><line x1="200" y1="218" x2="200" y2="70" stroke="#B98F4A" stroke-width="2" stroke-linecap="round"/></g>
+      <circle cx="200" cy="200" r="9" fill="url(#goldg)"/>
+      <circle cx="200" cy="200" r="3" fill="#061A17"/>
+    </svg>
+  </div>
+</section>
+
+<main id="about">
+  <article class="article">
+    <h2>SumHours: A Clearer Way to Add Up Your Working Hours</h2>
+
+    <p>SumHours is built around one simple idea: your hours deserve to be added up clearly, quickly and without second guessing. Whether you run a small team, work as a freelancer or manage shifts for a growing business, the time you record turns into pay, invoices and plans. When the total is wrong, everything built on it is wrong too.</p>
+
+    <p>Most people start tracking time with a notebook or a loose spreadsheet, and it works for a while. Then the weeks pile up, breaks get forgotten and totals stop matching. A clean method fixes that, and you can <a href="https://sumhours.com">See More</a> about how SumHours approaches the job of adding hours the right way.</p>
+
+    <figure class="reveal">
+      <svg viewBox="0 0 800 380" role="img" aria-label="Illustration of a digital timesheet with daily entries and a highlighted weekly total of 40 hours">
+        <rect width="800" height="380" fill="#061A17"/>
+        <rect x="60" y="40" width="680" height="300" rx="6" fill="#0C2B26" stroke="#D8BC82" stroke-opacity=".4"/>
+        <text x="90" y="82" font-family="Georgia,serif" font-size="22" fill="#D8BC82">Weekly Timesheet</text>
+        <line x1="90" y1="98" x2="710" y2="98" stroke="#D8BC82" stroke-opacity=".3"/>
+        <g font-family="Arial,sans-serif" font-size="16" fill="#F4EEDD">
+          <text x="90" y="130">Monday</text><text x="330" y="130" fill="#9FB3AB">09:00 – 17:30</text><text x="640" y="130" text-anchor="end">8 h 00 m</text>
+          <text x="90" y="166">Tuesday</text><text x="330" y="166" fill="#9FB3AB">09:00 – 17:30</text><text x="640" y="166" text-anchor="end">8 h 00 m</text>
+          <text x="90" y="202">Wednesday</text><text x="330" y="202" fill="#9FB3AB">08:30 – 17:00</text><text x="640" y="202" text-anchor="end">8 h 00 m</text>
+          <text x="90" y="238">Thursday</text><text x="330" y="238" fill="#9FB3AB">09:00 – 17:30</text><text x="640" y="238" text-anchor="end">8 h 00 m</text>
+          <text x="90" y="274">Friday</text><text x="330" y="274" fill="#9FB3AB">09:00 – 17:30</text><text x="640" y="274" text-anchor="end">8 h 00 m</text>
+        </g>
+        <rect x="90" y="290" width="620" height="38" rx="3" fill="#D8BC82"/>
+        <text x="106" y="316" font-family="Georgia,serif" font-size="19" fill="#061A17" font-weight="700">Total this week</text>
+        <text x="694" y="316" text-anchor="end" font-family="Georgia,serif" font-size="19" fill="#061A17" font-weight="700">40 h 00 m</text>
+      </svg>
+      <figcaption>A tidy timesheet shows each day on one line and the weekly total at the bottom.</figcaption>
+    </figure>
+
+    <h3>What SumHours Actually Does</h3>
+    <p>At its core, SumHours helps you record the time you work and then adds those entries together. You enter a start and an end, or a simple number of hours, and the total builds itself. Instead of doing mental maths at the end of a long week, you look at one number and know it is right.</p>
+    <p>That sounds small, but it removes a surprising amount of stress. Time is the one thing every job shares, and getting it down accurately is the base for fair pay, honest invoices and realistic schedules.</p>
+
+    <h3>Why Adding Hours by Hand Goes Wrong</h3>
+    <p>Adding hours looks easy until minutes get involved. Eight hours and forty-five minutes plus seven hours and fifty minutes is not something most of us do well in our heads at six in the evening. The errors are rarely big, but they repeat every single week.</p>
+
+    <h4>Forgotten Breaks</h4>
+    <p>A lunch that ran long or a short break that was never noted can shift a daily total by half an hour. Over a month, that gap becomes a full working day that is either unpaid or overpaid.</p>
+
+    <h4>Rounding Habits</h4>
+    <p>Many people round every entry up or down to the nearest quarter hour. It feels harmless, yet a few minutes added or lost each day builds into hours across a pay period. Exact entries and exact totals keep the numbers fair for everyone.</p>
+
+    <h4>Scattered Records</h4>
+    <p>Hours written on sticky notes, in chat messages and in half-finished sheets are hard to collect later. When the records live in one place, nothing gets lost between the shift and the payslip.</p>
+
+    <figure class="reveal">
+      <svg viewBox="0 0 800 380" role="img" aria-label="Bar chart showing hours worked from Monday to Friday with a gold line marking an eight hour target">
+        <rect width="800" height="380" fill="#061A17"/>
+        <g stroke="#D8BC82" stroke-opacity=".15">
+          <line x1="80" y1="60" x2="740" y2="60"/><line x1="80" y1="120" x2="740" y2="120"/>
+          <line x1="80" y1="180" x2="740" y2="180"/><line x1="80" y1="240" x2="740" y2="240"/>
+          <line x1="80" y1="300" x2="740" y2="300" stroke-opacity=".5"/>
+        </g>
+        <g fill="url(#bar)">
+          <defs><linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0DDAE"/><stop offset="1" stop-color="#B98F4A"/></linearGradient></defs>
+          <rect x="120" y="132" width="70" height="168"/>
+          <rect x="250" y="120" width="70" height="180"/>
+          <rect x="380" y="144" width="70" height="156"/>
+          <rect x="510" y="108" width="70" height="192"/>
+          <rect x="640" y="150" width="70" height="150"/>
+        </g>
+        <line x1="80" y1="132" x2="740" y2="132" stroke="#F4EEDD" stroke-dasharray="6 6" stroke-opacity=".7"/>
+        <text x="744" y="128" font-family="Arial,sans-serif" font-size="13" fill="#F4EEDD" text-anchor="end">8 h target</text>
+        <g font-family="Arial,sans-serif" font-size="15" fill="#9FB3AB" text-anchor="middle">
+          <text x="155" y="328">Mon</text><text x="285" y="328">Tue</text><text x="415" y="328">Wed</text><text x="545" y="328">Thu</text><text x="675" y="328">Fri</text>
+        </g>
+        <g font-family="Arial,sans-serif" font-size="14" fill="#F4EEDD" text-anchor="middle">
+          <text x="155" y="124">7.8</text><text x="285" y="112">8.4</text><text x="415" y="136">7.3</text><text x="545" y="100">8.9</text><text x="675" y="142">7.0</text>
+        </g>
+      </svg>
+      <figcaption>A simple weekly chart shows which days ran over or under the planned hours.</figcaption>
+    </figure>
+
+    <h3>Features That Matter in Everyday Use</h3>
+    <p>A good hours tool does not need a long list of buttons. It needs a handful of things that work every time. These are the points worth looking for, and the ones SumHours is shaped around.</p>
+
+    <h4>Fast Daily Entries</h4>
+    <p>If logging time takes longer than a minute, people stop doing it. Short entry forms and sensible defaults keep the habit alive.</p>
+
+    <h4>Clear Weekly and Monthly Totals</h4>
+    <p>Daily numbers are useful, but the weekly and monthly totals are what you actually use. Seeing them roll up automatically saves a lot of end-of-month scrambling.</p>
+
+    <h4>Overtime Visibility</h4>
+    <p>When your weekly total passes the regular limit, you want to see it straight away. Spotting overtime as it builds helps managers plan and helps workers get paid for every extra hour.</p>
+
+    <h4>Easy Review and Correction</h4>
+    <p>Everyone makes a typing mistake sometimes. Being able to open an entry, fix it and watch the total update keeps records honest without any drama.</p>
+
+    <h3 id="steps">How to Use SumHours Step by Step</h3>
+    <p>Getting started is simple, and the routine takes only a few minutes each day. Here is a pattern that works well for most people.</p>
+
+    <h4>Step One: Set Your Working Pattern</h4>
+    <p>Decide your normal daily or weekly hours before you begin. That gives you a target to compare each total against.</p>
+
+    <h4>Step Two: Log Time as You Finish</h4>
+    <p>Add your start time, end time and any break as soon as a shift or work block ends. Entries made in the moment are almost always correct, while entries made on Friday afternoon are mostly guesses.</p>
+
+    <h4>Step Three: Check the Running Total</h4>
+    <p>Glance at your total midweek. If you are far under or over, you can adjust your plan while there is still time.</p>
+
+    <h4>Step Four: Review Before Pay or Invoice Day</h4>
+    <p>Do a final read of the week, correct anything odd and then use the total with confidence.</p>
+
+    <figure class="reveal">
+      <svg viewBox="0 0 800 380" role="img" aria-label="Week planner grid with highlighted work blocks showing how hours are spread across the days">
+        <rect width="800" height="380" fill="#061A17"/>
+        <g font-family="Arial,sans-serif" font-size="14" fill="#9FB3AB" text-anchor="middle">
+          <text x="190" y="50">Mon</text><text x="300" y="50">Tue</text><text x="410" y="50">Wed</text><text x="520" y="50">Thu</text><text x="630" y="50">Fri</text><text x="740" y="50">Sat</text>
+        </g>
+        <g font-family="Arial,sans-serif" font-size="13" fill="#9FB3AB">
+          <text x="50" y="104">08:00</text><text x="50" y="164">10:00</text><text x="50" y="224">12:00</text><text x="50" y="284">14:00</text><text x="50" y="344">16:00</text>
+        </g>
+        <g stroke="#D8BC82" stroke-opacity=".14">
+          <line x1="110" y1="95" x2="780" y2="95"/><line x1="110" y1="155" x2="780" y2="155"/><line x1="110" y1="215" x2="780" y2="215"/><line x1="110" y1="275" x2="780" y2="275"/><line x1="110" y1="335" x2="780" y2="335"/>
+        </g>
+        <g fill="#D8BC82">
+          <rect x="145" y="95" width="90" height="100" rx="4"/><rect x="145" y="225" width="90" height="100" rx="4" fill-opacity=".65"/>
+          <rect x="255" y="95" width="90" height="100" rx="4"/><rect x="255" y="225" width="90" height="100" rx="4" fill-opacity=".65"/>
+          <rect x="365" y="85" width="90" height="110" rx="4"/><rect x="365" y="225" width="90" height="90" rx="4" fill-opacity=".65"/>
+          <rect x="475" y="95" width="90" height="100" rx="4"/><rect x="475" y="225" width="90" height="110" rx="4" fill-opacity=".65"/>
+          <rect x="585" y="95" width="90" height="100" rx="4"/><rect x="585" y="225" width="90" height="80" rx="4" fill-opacity=".65"/>
+          <rect x="695" y="95" width="90" height="60" rx="4" fill-opacity=".35"/>
+        </g>
+      </svg>
+      <figcaption>Work blocks laid out across the week make gaps and long days easy to spot.</figcaption>
+    </figure>
+
+    <h3>Who Gets the Most From SumHours</h3>
+    <h4>Freelancers</h4>
+    <p>When you bill by the hour, every missing minute is lost income. Accurate totals let you send invoices that clients accept without questions.</p>
+
+    <h4>Shift Workers</h4>
+    <p>Rotating and split shifts are hard to add up by memory. A running total gives you proof of what you worked if a payslip ever looks different from your own count.</p>
+
+    <h4>Small Business Owners and Managers</h4>
+    <p>Payroll goes smoother when the hours are already summed and checked. You spend less time chasing corrections and more time running the business.</p>
+
+    <h3>A Personal Note on Tracking Time</h3>
+    <p>I used to keep my own hours in a plain notebook. For a few weeks it felt tidy, and then a busy month arrived. I found myself on a Sunday night trying to rebuild five days from memory, and my total was off by almost three hours. That was the moment I stopped trusting my memory and started logging at the end of every work block. The numbers were calmer, my invoices were cleaner and the Sunday panic disappeared.</p>
+
+    <h3>Tips for Cleaner Totals</h3>
+    <p>A few habits make any hours system work better. Log at the end of each block, never at the end of the week. Record breaks the same way every time. Use real start and end times rather than rounded guesses. Review your total once in the middle of the week so there are no surprises on the last day. These small routines matter more than any single feature.</p>
+
+    <h3 id="faqs">Frequently Asked Questions</h3>
+
+    <details>
+      <summary>What is SumHours used for?</summary>
+      <p>SumHours is used to record working hours and add them into clear daily, weekly and monthly totals. Those totals can then be used for pay, invoices and planning.</p>
+    </details>
+    <details>
+      <summary>Who can use SumHours?</summary>
+      <p>Freelancers, shift workers, small business owners and team managers can all use it. Anyone who needs a dependable hour total will find it useful.</p>
+    </details>
+    <details>
+      <summary>How often should I log my hours?</summary>
+      <p>Log them at the end of every shift or work block. Daily entries are far more accurate than trying to remember a whole week at once.</p>
+    </details>
+    <details>
+      <summary>Does SumHours help with overtime?</summary>
+      <p>Yes, clear weekly totals show exactly when regular hours end and overtime begins, so extra time does not slip past unnoticed.</p>
+    </details>
+    <details>
+      <summary>Can I use SumHours on my phone?</summary>
+      <p>The page is built to work on small screens, so you can check and enter hours from a phone, a tablet or a computer.</p>
+    </details>
+
+    <h3 id="conclusion">Conclusion</h3>
+    <p>Accurate hours are the quiet foundation of fair pay, honest invoices and sensible planning. SumHours keeps that foundation steady by turning daily entries into totals you can read at a glance, without the guesswork that comes with notebooks and scattered sheets.</p>
+    <p>Start with one habit: log your time when the work ends. Add a quick midweek check and a final review before pay day, and your numbers will stay clean week after week. Good records take only minutes, and they protect hours of effort.</p>
+  </article>
+</main>
+
+<footer>
+  <strong>SumHours</strong>
+  <div>Every hour counted. Every total clear.</div>
+</footer>
+
+<script>
+(function(){
+  var items=document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){items.forEach(function(e){e.classList.add('in')});return;}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);}
+    });
+  },{threshold:.15});
+  items.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
